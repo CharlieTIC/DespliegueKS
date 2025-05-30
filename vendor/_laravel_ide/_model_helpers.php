@@ -315,7 +315,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property int $order
+     * @property mixed $order
      * @property boolean $is_active
      * @property \Illuminate\Support\Carbon|null $end_at
      * @property \Illuminate\Support\Carbon $start_at
@@ -630,7 +630,7 @@ namespace App\Models {
     /**
      * App\Models\Producto
      *
-     * @property int $subcategoria_id
+     * @property mixed $subcategoria_id
      * @property float $precio
      * @property string $image_path
      * @property string|null $descripcion
@@ -946,7 +946,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property int $categoria_id
+     * @property mixed $categoria_id
      * @property string $nombre
      * @property int $id
      * @property-read \App\Models\Categoria $categoria
@@ -1258,7 +1258,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $profile_photo_path
-     * @property int|null $current_team_id
+     * @property mixed $current_team_id
      * @property string|null $remember_token
      * @property string|null $two_factor_confirmed_at
      * @property string|null $two_factor_recovery_codes
