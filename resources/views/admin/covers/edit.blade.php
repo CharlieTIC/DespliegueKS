@@ -1,0 +1,74 @@
+<x-admin-layout :breadcrums="[
+    ['name' => 'Dashboard', 'route' => route('dashboard')],
+    ['name' => 'Portadas', 'route' => route('covers.index')],
+    ['name' => 'Editar'],
+]">
+
+    <form action="{{ route('covers.update', $cover) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+
+        <figure class="relative mb-4">
+            <div class="absolute top-8 right-8">
+                <label class="flex items-center px-4 py-2 rounded-lg bg-white cursor-pointer">
+                    <i class="fas fa-camera"></i>
+                    Cambiar imagen
+                    <input type="file" class="hidden" accept="image/*" name="image"
+                        onchange="previewImage(event, '#imgPreview')">
+                </label>
+            </div>
+            <img src="{{$cover->image }}" alt="Portada"
+                class="aspect-[3/1] w-full object-cover object-center" id="imgPreview" />
+        </figure>
+
+        <div class="mb-4">
+            <x-label>Titulo</x-label>
+            <x-input name="title" value="{{ old('title', $cover->title) }}" class="w-full"
+                placeholder="Por favor ingrese título de portada" />
+        </div>
+
+        <div class="mb-4">
+            <x-label>Fecha de inicio</x-label>
+            <x-input type="date" name="start_at" value="{{ old('start_at', $cover->start_at->format('Y-m-d')) }}"
+                class="w-full" placeholder="Por favor ingrese fecha de inicio" />
+        </div>
+
+        <div class="mb-4">
+            <x-label>Fecha fin (opcional)</x-label>
+            <x-input type="date" name="end_at"
+            value="{{ old('start_at', $cover->start_at ? $cover->start_at->format('Y-m-d') : '') }}"    
+            class="w-full"
+                placeholder="Por favor ingrese fecha de fin" />
+        </div>
+
+        <div class="mb-4 flex space-x-2">
+            <label>
+                <x-input type="radio" name="is_active" value="1" :checked="$cover->is_active ==1" />
+                Activo
+            </label>
+
+            <label>
+                <x-input type="radio" name="is_active" value="0" :checked="$cover->is_active == 0" />
+                Inactivo
+            </label>
+        </div>
+
+        <div class="flex justify-end">
+            <x-button>Actualizar Portada</x-button>
+        </div>
+    </form>
+
+    @push('js')
+        <script>
+            function previewImage(event, querySelector) {
+                let input = event.target;
+                let imgPreview = document.querySelector(querySelector);
+                if (!input.files.length) return;
+                let file = input.files[0];
+                let objectURL = URL.createObjectURL(file);
+                imgPreview.src = objectURL;
+            }
+        </script>
+    @endpush
+
+</x-admin-layout>
