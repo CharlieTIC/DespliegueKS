@@ -1,5 +1,5 @@
-# Etapa 1: Build de frontend y dependencias
-FROM node:18 as frontend
+# Etapa 1: Build frontend y dependencias
+FROM node:21 as frontend
 
 WORKDIR /app
 
@@ -22,25 +22,25 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copia el proyecto desde la etapa frontend
+# Copia proyecto desde frontend
 COPY --from=frontend /app /var/www/html
 
-# Da permisos a Laravel
+# Da permisos correctos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Activa mod_rewrite para Laravel
 RUN a2enmod rewrite
 
-# Copia configuración apache
+# Copia configuración Apache (vhost.conf)
 COPY ./docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
-# Ejecuta comandos Laravel necesarios
-RUN composer install --no-dev --optimize-autoloader \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache \
-    && php artisan migrate --force \
-    && php artisan storage:link
+# Copia entrypoint script y dale permisos
+COPY ./docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 80
+
+# Usa entrypoint para migraciones + arranque apache
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["apache2-foreground"]
