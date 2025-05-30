@@ -22,7 +22,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copia el proyecto
+# Copia el proyecto desde la etapa frontend
 COPY --from=frontend /app /var/www/html
 
 # Da permisos a Laravel
@@ -32,7 +32,15 @@ RUN chown -R www-data:www-data /var/www/html \
 # Activa mod_rewrite para Laravel
 RUN a2enmod rewrite
 
-# Configura el virtualhost de Apache
+# Copia configuración apache
 COPY ./docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+
+# Ejecuta comandos Laravel necesarios
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache \
+    && php artisan migrate --force \
+    && php artisan storage:link
 
 EXPOSE 80
