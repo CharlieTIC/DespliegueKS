@@ -12,10 +12,15 @@ class Navigation extends Component
 
     public $categoria_id;
 
-    public function mount() {
-        $this->categorias = \App\Models\Categoria::all();
+public function mount() {
+    $this->categorias = Categoria::all();
+
+    if ($this->categorias->isNotEmpty()) {
         $this->categoria_id = $this->categorias->first()->id;
+    } else {
+        $this->categoria_id = null;
     }
+}
 
     #[Computed()]
     public function subcategorias() {
