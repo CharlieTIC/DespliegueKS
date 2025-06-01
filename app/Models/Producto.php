@@ -17,6 +17,13 @@ class Producto extends Model
         return $this->belongsTo(Subcategoria::class);
     }
 
+    public function pedidos()
+{
+    return $this->belongsToMany(Pedido::class, 'pedido_producto')
+                ->withPivot('cantidad', 'precio_unitario')
+                ->withTimestamps();
+}
+
         protected $fillable = [
         'sku',
         'nombre',
