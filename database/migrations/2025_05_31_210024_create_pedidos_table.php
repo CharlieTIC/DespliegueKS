@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedidos', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
-    $table->string('estado')->default('pendiente');
-    $table->decimal('total', 10, 2);
-    $table->timestamp('fecha_pedido')->useCurrent();
-    $table->timestamps();
-});
+        // Check if the table doesn't exist before creating it
+        if (!Schema::hasTable('pedidos')) {
+            Schema::create('pedidos', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+                $table->string('estado')->default('pendiente');
+                $table->decimal('total', 10, 2);
+                $table->timestamp('fecha_pedido')->useCurrent();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -26,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop the table if it exists
         Schema::dropIfExists('pedidos');
     }
 };
