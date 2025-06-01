@@ -18,7 +18,7 @@
         
    
     <div class="swiper-slide">
-    <img src="{{ asset($cover->image) }}" alt="" class="w-full aspect-[3/1] object-cover object-center">
+    <img src="{{ asset('storage/' . $cover->image) }}" alt="" class="w-full aspect-[3/1] object-cover object-center">
     </div>
 
      @endforeach
