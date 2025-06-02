@@ -40,10 +40,5 @@ class Producto extends Model
         );
 
      }
-
-     public function getImageAttribute()
-{
-    return asset('storage/' . $this->image_path);
-}
     
 }
