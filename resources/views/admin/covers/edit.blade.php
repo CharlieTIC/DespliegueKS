@@ -17,8 +17,8 @@
                         onchange="previewImage(event, '#imgPreview')">
                 </label>
             </div>
-            <img src="{{$cover->image }}" alt="Portada"
-                class="aspect-[3/1] w-full object-cover object-center" id="imgPreview" />
+            <img src="{{ asset('storage/' . $cover->image) }}" alt="Portada" class="aspect-[3/1] w-full object-cover object-center" id="imgPreview" />
+
         </figure>
 
         <div class="mb-4">
@@ -36,7 +36,7 @@
         <div class="mb-4">
             <x-label>Fecha fin (opcional)</x-label>
             <x-input type="date" name="end_at"
-            value="{{ old('start_at', $cover->start_at ? $cover->start_at->format('Y-m-d') : '') }}"    
+            value="{{ old('end_at', $cover->end_at ? $cover->end_at->format('Y-m-d') : '') }}"  
             class="w-full"
                 placeholder="Por favor ingrese fecha de fin" />
         </div>
