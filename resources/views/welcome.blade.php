@@ -11,8 +11,7 @@
 
             @foreach ($covers as $cover)
                 <div class="swiper-slide">
-                    <img src="{{ asset('storage/' . $cover->image) }}" alt="{{ $cover->title }}">
-     class="w-full aspect-[3/1] object-cover object-center">>
+                    <img src="{{ asset('storage/' . $cover->image) }}" alt="{{ $cover->title }}" class="w-full aspect-[3/1] object-cover object-center">>
                 </div>
             @endforeach
         </div>
