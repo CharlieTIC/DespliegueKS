@@ -18,11 +18,11 @@ class Producto extends Model
     }
 
     public function pedidos()
-{
+    {
     return $this->belongsToMany(Pedido::class, 'pedido_producto')
                 ->withPivot('cantidad', 'precio_unitario')
                 ->withTimestamps();
-}
+    }
 
         protected $fillable = [
         'sku',
@@ -40,5 +40,10 @@ class Producto extends Model
         );
 
      }
+
+          public function getImageAttribute()
+    {
+        return asset('storage/' . $this->image_path);
+    }
     
 }
