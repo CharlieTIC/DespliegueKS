@@ -31,28 +31,33 @@ class CoverController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-        $data = $request->validate([
-            'image' => 'required|image|max:1024',
-            'title' => 'required|string|max:255',
-            'start_at' => 'required|date',
-            'end_at' => 'nullable|date|after_or_equal:start_at',
-            'is_active' => 'required|boolean',
-        ]);
+public function store(Request $request)
+{
+    $data = $request->validate([
+        'image' => 'required|image|max:1024',
+        'title' => 'required|string|max:255',
+        'start_at' => 'required|date',
+        'end_at' => 'nullable|date|after_or_equal:start_at',
+        'is_active' => 'required|boolean',
+    ]);
 
-        $data['image_path'] = Storage::put('covers', $data['image']);
+    // Guarda la imagen en disco 'public' dentro de la carpeta 'covers'
+    $path = $request->file('image')->store('covers', 'public');
 
-        $cover = Cover::create($data);
+    // Asigna la ruta relativa al campo 'image' que usa tu vista
+    $data['image'] = $path;
 
-        session()->flash('swal', [
-            'icon' => 'success',
-            'title' => 'Portada creada con éxito',
-        ]);
+    // Crea el cover
+    $cover = Cover::create($data);
 
-        return redirect()->route('covers.index');
-    }
+    session()->flash('swal', [
+        'icon' => 'success',
+        'title' => 'Portada creada con éxito',
+    ]);
+
+    return redirect()->route('covers.index');
+}
+
 
     /**
      * Display the specified resource.
