@@ -36,6 +36,12 @@ class Cover extends Model
         );
 
      }
+
+     // En el modelo Cover
+public function getImageAttribute()
+{
+    return asset('storage/' . $this->image_path);
+}
         
 
 }
