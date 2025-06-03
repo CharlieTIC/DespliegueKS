@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProductoController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use \App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Route;
 
 // Ruta de inicio
 Route::get('/', [WelcomeController::class, 'index']) ->name('welcome.index');
@@ -30,10 +31,18 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/test-upload', function () {
+    return view('livewire.test-upload');
+});
+
 // Ruta para instanciar un carrito de compras
 Route::get('prueba', function(){
     
     Cart::instance('compra');
     return Cart::content();
+
+Route::get('/test-upload', function () {
+    return view('livewire.test-upload');
+});
 
 });
