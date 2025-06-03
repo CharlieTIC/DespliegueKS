@@ -43,9 +43,4 @@ Route::get('prueba', function(){
     
     Cart::instance('compra');
     return Cart::content();
-
-Route::get('/test-upload', function () {
-    return view('livewire.test-upload');
-});
-
 });
