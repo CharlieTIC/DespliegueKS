@@ -14,7 +14,7 @@ Route::get('/', [WelcomeController::class, 'index']) ->name('welcome.index');
 // Ruta para mostrar productos y categorias de productos
 //Route::get('productos/{producto}', [\App\Http\Controllers\Admin\ProductoController::class, 'show'])->name('producto.show');
 //Route::get('categorias/{categoria}', [\App\Http\Controllers\Admin\CategoriaController::class, 'show'])->name('categorias.show');
-Route::resource('producto', ProductoController::class);
+Route::get('producto', ProductoController::class);
 
 //Ruta controlador del carrito de compra
 Route::get('cart', [CartController::class,'index'])->name('cart.index');
