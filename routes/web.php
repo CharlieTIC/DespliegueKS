@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProductoController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use \App\Http\Controllers\CartController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+
+
 
 // Ruta de inicio
 Route::get('/', [WelcomeController::class, 'index']) ->name('welcome.index');
