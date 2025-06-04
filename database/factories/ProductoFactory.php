@@ -20,9 +20,10 @@ class ProductoFactory extends Factory
             'sku' => $this->faker->unique()->numberBetween(100000, 999999),
             'nombre' => $this->faker->sentence(),
             'descripcion' => $this->faker->text(200),
-            'image_path' => 'producto/' . $this->faker->image('public/storage/producto', 640, 480, null, false),
+            // Usamos una imagen falsa por URL o ruta dummy
+            'image_path' => 'https://via.placeholder.com/640x480.png?text=Producto+Fake', // O puedes usar una URL como https://via.placeholder.com/640x480
             'precio' => $this->faker->randomFloat(2, 1, 1000),
-            'subcategoria_id' => $this->faker->numberBetween(1,11)
+            'subcategoria_id' => $this->faker->numberBetween(1, 11),
         ];
     }
 }
