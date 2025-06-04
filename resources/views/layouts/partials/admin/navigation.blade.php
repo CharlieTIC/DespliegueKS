@@ -52,6 +52,13 @@
                                     {{ __('Manage Account') }}
                                 </div>
 
+                                {{-- Solo visible para admin --}}
+                                @if (auth()->user()?->is_admin)
+                                    <x-dropdown-link href="{{ route('dashboard') }}">
+                                        Panel de administración
+                                    </x-dropdown-link>
+                                @endif
+
                                 <x-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
@@ -67,12 +74,12 @@
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
-
                                     <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                         {{ __('Log Out') }}
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
+
                         </x-dropdown>
                     </div>
                 </div>

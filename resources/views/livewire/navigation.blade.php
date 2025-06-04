@@ -54,6 +54,13 @@
                                     Mi perfil
                                 </x-dropdown-link>
 
+                                 {{-- Enlace al panel ADMINISTRADOR - Solo visible para usuarios admin --}}
+                                @if (auth()->user()?->is_admin)
+                                    <x-dropdown-link href="{{ route('dashboard') }}">
+                                        Panel de administración
+                                    </x-dropdown-link>
+                                @endif
+
                                 <div class="boder-t border-gray-200"></div>
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}" x-data>

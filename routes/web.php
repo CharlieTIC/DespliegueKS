@@ -7,10 +7,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProductoController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use \App\Http\Controllers\CartController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-
-
+use App\Http\Controllers\CompraController;
 
 // Ruta de inicio
 Route::get('/', [WelcomeController::class, 'index']) ->name('welcome.index');
@@ -23,6 +20,8 @@ Route::resource('producto', ProductoController::class);
 //Ruta controlador del carrito de compra
 Route::get('cart', [CartController::class,'index'])->name('cart.index');
 
+Route::get('compra', [CompraController::class, 'index'])->name('compra.index');
+
 
 Route::middleware([
     'auth:sanctum',
@@ -32,10 +31,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
-
-Route::get('/test-upload', function () {
-    return view('livewire.test-upload');
 });
 
 // Ruta para instanciar un carrito de compras

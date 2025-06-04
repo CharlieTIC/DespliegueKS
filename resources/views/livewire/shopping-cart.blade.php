@@ -64,7 +64,7 @@
                     <p>{{ Cart::subtotal() }} €</p>
                 </div>
 
-                <a href="" class="btn btn-gray block w-full text-center">
+                <a href="{{route('compra.index')}}" class="btn btn-gray block w-full text-center">
                     Continuar compra
                 </a>
             </div>

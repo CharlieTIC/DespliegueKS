@@ -14,8 +14,8 @@
         </div>
 
 
-        
-    <img src="{{ Storage::url($productoEdit['image_path'] ?? '') }}" class="aspect-[16/9] object-cover object-center" 
+        <img class="aspect-[16/9] object-cover object-center" 
+     src="{{ $image ? $image->temporaryUrl() : Storage::url($productoEdit['image_path'] ?? '') }}" 
      alt="">
     </figure>
 

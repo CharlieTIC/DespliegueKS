@@ -10,6 +10,10 @@
       @apply bg-blue-500 text-white hover:bg-blue-700;
   }
 
+  .btn-outline-gray {
+      @apply bg-transparent hover:bg-gray-700 text-gray-900 hover:text-white border border-gray-700 hover:border-transparent;
+  }
+
   .btn-green {
       @apply bg-blue-500 text-white hover:bg-blue-700;
   }
@@ -18,12 +22,10 @@
       @apply bg-blue-500 text-white hover:bg-blue-700;
   }
 
-    .btn-bluedark {
+  .btn-bluedark {
       @apply bg-blue-900 text-white hover:bg-blue-600;
   }
 
-   .btn-gris {
+  .btn-gris {
       @apply bg-gray-600 text-white hover:bg-gray-900;
   }
-
-  
